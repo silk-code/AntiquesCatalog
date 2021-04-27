@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Antiques Catalog</string>
+    <string name="action_settings">Settings</string>
+    <string name="about">About</string>
+
+    <string name="title_activity_add_new_item">Add New Item</string>
+    <string name="add_new_item_banner">New Piece</string>
+    <string name="tv_title">Title:</string>
+    <string name="ed_hint_title">e.g. Pocket Watch</string>
+    <string name="tv_category">Category:</string>
+    <string name="tv_time_period">Time Period:</string>
+    <string name="tv_condition">Condition:</string>
+    <string name="btn_add">Add</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preferences -->
+    <string name="night_mode_key">Night Mode</string>
+    <string name="night_mode_title">Dark/Night Mode</string>
+    <string name="night_mode_off">Never use Night/Dark Mode</string>
+    <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
+    <string name="settings_category_display">Display</string>
+    <string name="settings_category_content">Content</string>
+</resources>

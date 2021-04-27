@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <!-- Banner -->
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:text="@string/add_new_item_banner"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <!--Title-->
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/multi_text_view_style"
+        android:text="@string/tv_title" />
+
+    <EditText
+        android:id="@+id/et_title"
+        style="@style/main_edit_text"
+        android:hint="@string/ed_hint_title" />
+
+    <!--Category-->
+    <TextView
+        android:id="@+id/tv_category"
+        style="@style/multi_text_view_style"
+        android:text="@string/tv_category" />
+
+    <RadioGroup
+        android:id="@+id/form_rg_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_category_art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_category_porcelain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Porcelain" />
+
+        <RadioButton
+            android:id="@+id/rb_category_figurine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Figurine" />
+
+        <RadioButton
+            android:id="@+id/rb_category_tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tools" />
+
+        <RadioButton
+            android:id="@+id/rb_category_jewelry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jewelry" />
+
+        <RadioButton
+            android:id="@+id/rb_category_misc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Misc" />
+
+    </RadioGroup>
+
+    <!--Time Period-->
+    <TextView
+        android:id="@+id/tv_time_period"
+        style="@style/multi_text_view_style"
+        android:text="@string/tv_time_period" />
+
+    <RadioGroup
+        android:id="@+id/rg_time_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_time_period_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18th and earlier"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_time_period_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="19th" />
+
+        <RadioButton
+            android:id="@+id/rb_time_period_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Early 20th" />
+
+        <RadioButton
+            android:id="@+id/rb_time_period_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Late 20th" />
+    </RadioGroup>
+
+    <!--Condition-->
+    <TextView
+        android:id="@+id/tv_condition"
+        style="@style/multi_text_view_style"
+        android:text="@string/tv_condition" />
+
+    <RadioGroup
+        android:id="@+id/rg_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_condition_needs_repair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Needs repair"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/rb_condition_fair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fair" />
+
+        <RadioButton
+            android:id="@+id/rb_condition_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good" />
+
+        <RadioButton
+            android:id="@+id/rb_condition_excellent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Excellent" />
+    </RadioGroup>
+
+
+    <!--TODO add img-->
+    <!--Image-->
+
+    <!--Submit button-->
+    <Button
+        android:id="@+id/btn_add_new_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add" />
+</LinearLayout>
