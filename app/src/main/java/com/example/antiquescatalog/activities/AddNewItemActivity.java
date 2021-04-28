@@ -24,11 +24,13 @@ import com.example.antiquescatalog.R;
 
 public class AddNewItemActivity extends AppCompatActivity {
 
+    //region Properties
     private Catalog mCatalog;
     private EditText et_title;
     private RadioGroup rg_category, rg_condition, rg_time_period;
     private RadioButton rb_category, rb_condition, rb_time_period;
     private Button btn;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +54,13 @@ public class AddNewItemActivity extends AppCompatActivity {
         finish();
     }
 
-
     private void setupToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() !=null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     private void setupFAB() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,7 @@ public class AddNewItemActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setupFields() {
         String s=getIntent().getStringExtra("mCatalog");
         mCatalog=Catalog.getObjectFromJSON(s);
@@ -85,9 +88,11 @@ public class AddNewItemActivity extends AppCompatActivity {
         } else
             return super.onOptionsItemSelected(item);
     }
+
     private void getCheckedRadioButtons() {
         rb_category=findViewById(rg_category.getCheckedRadioButtonId());
         rb_condition=findViewById(rg_condition.getCheckedRadioButtonId());
         rb_time_period=findViewById(rg_time_period.getCheckedRadioButtonId());
     }
+
 }

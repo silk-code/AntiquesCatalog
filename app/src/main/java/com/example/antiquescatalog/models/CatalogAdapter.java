@@ -22,6 +22,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CardViewHolder> {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
+
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

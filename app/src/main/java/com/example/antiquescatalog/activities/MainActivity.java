@@ -31,12 +31,14 @@ import static com.example.antiquescatalog.models.Catalog.getJSONFromObject;
 import static com.example.antiquescatalog.models.Catalog.getObjectFromJSON;
 
 public class MainActivity extends AppCompatActivity {
+
+    //region Properties
     private Catalog mCatalog;
     private CatalogAdapter mCatalogAdapter;
     private ArrayList<Item> list;
-    //private final String mKeyCheckedPiles = "";
     private final String mKeyCatalog = "CATALOG";
     public static Item newItem = null;
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,33 +46,54 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupToolBar();
         setupFAB();
-        mCatalog = new Catalog();
+        setCatalog(savedInstanceState);
+        setupRecyclerView();
+    }
 
+    //region Set Up Activity
+    private void setupToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void setupFAB() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddNewItem();
+            }
+        });
+    }
+
+    private void showAddNewItem() {
+        //dismissSnackBarIfShown();
+        Intent intent = new Intent(getApplicationContext(), AddNewItemActivity.class);
+        intent.putExtra("mCatalog", mCatalog.getJSONFromCurrentObject());
+        startActivity(intent);
+    }
+
+    private void setCatalog(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mCatalog = Catalog.getObjectFromJSON(savedInstanceState.getString(mKeyCatalog));
+            //mTextView.setText(savedText);
+        } else {
+            mCatalog = new Catalog();
+        }
+    }
+
+    private void setupRecyclerView() {
         final int columns = getResources().getInteger(R.integer.gallery_columns);
         RecyclerView recyclerView = findViewById(R.id.rv_items);
         recyclerView.setLayoutManager(new GridLayoutManager(this, columns));
-
         list = (ArrayList) mCatalog.getList();
         mCatalogAdapter = new CatalogAdapter(this, list);
-
         //mCatalogAdapter.setClickListener(this);
         recyclerView.setAdapter(mCatalogAdapter);
     }
+    //endregion
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        //if coming from AddNewItemActivity, there's an update
-        if (newItem != null) {
-            mCatalog.addItem(newItem);
-            newItem = null;
-            list = (ArrayList) mCatalog.getList();
-        }
-        mCatalogAdapter.notifyDataSetChanged();
-    }
-
-
+    //region Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,45 +132,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         startActivityForResult(intent, 1);
     }
+    //endregion
 
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if (requestCode == 1) {
-//            //restoreOrSetFromPreferences_AllAppAndGameSettings();
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-
-//    @Override
-//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        mCatalog = getObjectFromJSON(savedInstanceState.getString(mKeyCatalog));
-//        //updateUI();
-//    }
-
-
-    private void setupToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    //region Save State
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(mKeyCatalog, getJSONFromObject(mCatalog));
     }
 
-    private void setupFAB() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddNewItem();
-            }
-        });
-    }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-    private void showAddNewItem() {
-        //dismissSnackBarIfShown();
-        Intent intent = new Intent(getApplicationContext(), AddNewItemActivity.class);
-        intent.putExtra("mCatalog", mCatalog.getJSONFromCurrentObject());
-        startActivity(intent);
+        //if coming from AddNewItemActivity, there's an update
+        if (newItem != null) {
+            mCatalog.addItem(newItem);
+            newItem = null;
+            list = (ArrayList) mCatalog.getList();
+        }
+        mCatalogAdapter.notifyDataSetChanged();
     }
-
+    //endregion
 }

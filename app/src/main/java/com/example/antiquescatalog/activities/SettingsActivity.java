@@ -44,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
             setNightModePreferenceListener();
         }
+
         private void setNightModePreferenceListener() {
             Preference nightModePreference = findPreference(getString(R.string.night_mode_key));
             if (nightModePreference != null) {
@@ -55,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
