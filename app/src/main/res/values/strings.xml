@@ -20,4 +20,6 @@
     <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
     <string name="settings_category_display">Display</string>
     <string name="settings_category_content">Content</string>
+    <string name="title_activity_view_item_card">Item Information</string>
+    <string name="filepath_save">/data/data/com.example.antiquescatalog/files/save.txt</string>
 </resources>

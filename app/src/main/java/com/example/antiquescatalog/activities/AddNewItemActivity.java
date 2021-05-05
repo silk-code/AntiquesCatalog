@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.antiquescatalog.R;
 
+import static com.example.antiquescatalog.lib.Utils.showInfoDialog;
+
 public class AddNewItemActivity extends AppCompatActivity {
 
     //region Properties
@@ -37,7 +39,6 @@ public class AddNewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_item);
         setupToolBar();
-        setupFAB();
         setupFields();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,37 +50,29 @@ public class AddNewItemActivity extends AppCompatActivity {
 
     private void handelClick() {
         getCheckedRadioButtons();
-        MainActivity.newItem=new Item(et_title.getText().toString(),rb_category.getText().toString(),
-                rb_time_period.getText().toString(),rb_condition.getText().toString());
+        MainActivity.newItem = new Item(et_title.getText().toString(), rb_category.getText().toString(),
+                rb_time_period.getText().toString(), rb_condition.getText().toString());
         finish();
     }
 
     private void setupToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() !=null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setupFAB() {
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-    }
 
     private void setupFields() {
-        String s=getIntent().getStringExtra("mCatalog");
-        mCatalog=Catalog.getObjectFromJSON(s);
-        et_title= findViewById(R.id.et_title);
-        btn=findViewById(R.id.btn_add_new_item);
-        rg_category= findViewById(R.id.form_rg_category);
-        rg_condition= findViewById(R.id.rg_condition);
-        rg_time_period= findViewById(R.id.rg_time_period);
+        String s = getIntent().getStringExtra("mCatalog");
+        mCatalog = Catalog.getObjectFromJSON(s);
+        et_title = findViewById(R.id.et_title);
+        btn = findViewById(R.id.btn_add_new_item);
+        rg_category = findViewById(R.id.form_rg_category);
+        rg_condition = findViewById(R.id.rg_condition);
+        rg_time_period = findViewById(R.id.rg_time_period);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -90,9 +83,9 @@ public class AddNewItemActivity extends AppCompatActivity {
     }
 
     private void getCheckedRadioButtons() {
-        rb_category=findViewById(rg_category.getCheckedRadioButtonId());
-        rb_condition=findViewById(rg_condition.getCheckedRadioButtonId());
-        rb_time_period=findViewById(rg_time_period.getCheckedRadioButtonId());
+        rb_category = findViewById(rg_category.getCheckedRadioButtonId());
+        rb_condition = findViewById(rg_condition.getCheckedRadioButtonId());
+        rb_time_period = findViewById(rg_time_period.getCheckedRadioButtonId());
     }
 
 }

@@ -35,10 +35,7 @@
 
     <RadioGroup
         android:id="@+id/form_rg_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        style="@style/rg_form">
 
         <RadioButton
             android:id="@+id/rb_category_art"
@@ -87,10 +84,7 @@
 
     <RadioGroup
         android:id="@+id/rg_time_period"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        style="@style/rg_form">
 
         <RadioButton
             android:id="@+id/rb_time_period_1"
@@ -126,10 +120,7 @@
 
     <RadioGroup
         android:id="@+id/rg_condition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        style="@style/rg_form">
 
         <RadioButton
             android:id="@+id/rb_condition_needs_repair"

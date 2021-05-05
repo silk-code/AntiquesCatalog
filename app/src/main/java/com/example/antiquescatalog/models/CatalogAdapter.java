@@ -9,18 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiquescatalog.R;
+import com.example.antiquescatalog.interfaces.AdapterOnItemClickListener;
 
 import java.util.List;
 
-public class CatalogAdapter extends RecyclerView.Adapter<CardViewHolder> {
+public class CatalogAdapter extends RecyclerView.Adapter<CardViewHolder>  {
 
     private List<Item> mData;
     private LayoutInflater mInflater;
-    //private ItemClickListener mClickListener;
+    static AdapterOnItemClickListener mClickListener;
+
 
     public CatalogAdapter(Context context, List<Item> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+    }
+
+    public void setOnItemClickListener (AdapterOnItemClickListener adapterOnItemClickListener){
+        mClickListener=adapterOnItemClickListener;
     }
 
     @NonNull
@@ -41,5 +47,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CardViewHolder> {
         return mData.size();
     }
 
-
+    public Item getItem(int position) {
+        return mData.get(position);
+    }
 }

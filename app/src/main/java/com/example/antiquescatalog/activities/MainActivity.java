@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.antiquescatalog.R;
+import com.example.antiquescatalog.interfaces.AdapterOnItemClickListener;
 import com.example.antiquescatalog.lib.Utils;
 import com.example.antiquescatalog.models.Catalog;
 import com.example.antiquescatalog.models.CatalogAdapter;
@@ -20,10 +21,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -95,7 +98,21 @@ public class MainActivity extends AppCompatActivity {
         mCatalogAdapter = new CatalogAdapter(this, list);
         //mCatalogAdapter.setClickListener(this);
         recyclerView.setAdapter(mCatalogAdapter);
+        mCatalogAdapter.setOnItemClickListener(getNewOnItemClickListener());
     }
+
+    private AdapterOnItemClickListener getNewOnItemClickListener() {
+        return new AdapterOnItemClickListener() {
+            public void onItemClick(int position, View view) {
+                showInfoDialog(MainActivity.this, "Item information",
+                        "Title:  " + mCatalogAdapter.getItem(position).getTitle() +
+                                "\nCategory: " + mCatalogAdapter.getItem(position).getCategory() +
+                                "\nTime Period: " + mCatalogAdapter.getItem(position).getTimePeriod() +
+                                "\nCondition: " + mCatalogAdapter.getItem(position).getCondition());
+            }
+        };
+    }
+
 
     private void restoreOrSetFromPreferences() {
         SharedPreferences sp = getDefaultSharedPreferences(this);
@@ -105,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setCatalog(Bundle savedInstanceState) {
         //TODO another if to check if file empty
-        File file = new File("/data/data/com.example.antiquescatalog/files/save.txt");
+        File file = new File(getString(R.string.filepath_save));
         if (file.exists()) {
             //Read text from file
             StringBuilder text = new StringBuilder();
@@ -117,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 br.close();
                 mCatalog = Catalog.getObjectFromJSON(text.toString());
-                return;
             } catch (IOException e) {
                 //TODO msg to show problem
             }
@@ -126,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 mCatalog = Catalog.getObjectFromJSON(savedInstanceState.getString(mKeyCatalog));
                 return;
-
-
             }
             mCatalog = new Catalog();
         }
@@ -218,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void writeFileOnInternalStorage(Context context, String sFileName, String textToSave) {
         try {
-            File file = new File("/data/data/com.example.antiquescatalog/files/" + sFileName);
+            File file = new File(getString(R.string.filepath_save) + sFileName);
             if (file.exists()) {
                 file.delete();
             }
