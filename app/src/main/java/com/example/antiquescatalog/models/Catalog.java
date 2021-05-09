@@ -28,6 +28,10 @@ public class Catalog {
         itemArrayList.add(i);
     }
 
+    public void updateList(Catalog c) {
+        this.itemArrayList.addAll(c.getList());
+    }
+
     public List<Item> getList() {
         return itemArrayList;
     }

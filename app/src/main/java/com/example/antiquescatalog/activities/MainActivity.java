@@ -37,6 +37,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static com.example.antiquescatalog.lib.Utils.showInfoDialog;
@@ -121,7 +122,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setCatalog(Bundle savedInstanceState) {
-        //TODO another if to check if file empty
+        if (savedInstanceState != null) {
+            mCatalog = Catalog.getObjectFromJSON(savedInstanceState.getString(mKeyCatalog));
+            return;
+        } else {
+            mCatalog = new Catalog();
+        }
+
         File file = new File(getString(R.string.filepath_save));
         if (file.exists()) {
             //Read text from file
@@ -133,17 +140,12 @@ public class MainActivity extends AppCompatActivity {
                     text.append(line);
                 }
                 br.close();
-                mCatalog = Catalog.getObjectFromJSON(text.toString());
+                Catalog c = Catalog.getObjectFromJSON(text.toString());
+                mCatalog.updateList(c);
+                return;
             } catch (IOException e) {
                 //TODO msg to show problem
             }
-
-        } else {
-            if (savedInstanceState != null) {
-                mCatalog = Catalog.getObjectFromJSON(savedInstanceState.getString(mKeyCatalog));
-                return;
-            }
-            mCatalog = new Catalog();
         }
     }
 
@@ -187,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
     private void showSettings() {
         //dismissSnackBarIfShown();
         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        intent.putExtra("mCatalog", mCatalog.getJSONFromCurrentObject());
         startActivityForResult(intent, 1);
     }
     //endregion
@@ -213,26 +216,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        writeFileOnInternalStorage(this, path, mCatalog.getJSONFromCurrentObject());
+        writeFileOnInternalStorage(this, Catalog.getJSONFromObject(mCatalog));
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        writeFileOnInternalStorage(this, path, mCatalog.getJSONFromCurrentObject());
+        writeFileOnInternalStorage(this, Catalog.getJSONFromObject(mCatalog));
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        writeFileOnInternalStorage(this, path, mCatalog.getJSONFromCurrentObject());
+        writeFileOnInternalStorage(this, Catalog.getJSONFromObject(mCatalog));
         super.onPause();
     }
 
 
-    public void writeFileOnInternalStorage(Context context, String sFileName, String textToSave) {
+    public void writeFileOnInternalStorage(Context context, String textToSave) {
         try {
-            File file = new File(getString(R.string.filepath_save) + sFileName);
+            File file = new File(getString(R.string.filepath_save));
             if (file.exists()) {
                 file.delete();
             }
