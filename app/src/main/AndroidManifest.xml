@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.antiquescatalog">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:requiredFeature="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiquesCatalog">
-
+        <activity
+            android:name=".activities.ViewItemCardActivity"
+            android:label="@string/title_activity_view_item_card"
+            android:theme="@style/Theme.AntiquesCatalog.NoActionBar.Dialog"/>
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" />

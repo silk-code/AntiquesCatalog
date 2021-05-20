@@ -12,6 +12,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <include layout="@layout/item_inner_card"/>
+    <include layout="@layout/inner_item_card"/>
 
 </com.google.android.material.card.MaterialCardView>

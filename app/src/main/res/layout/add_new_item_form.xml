@@ -41,8 +41,8 @@
             android:id="@+id/rb_category_art"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Art"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="Art" />
 
         <RadioButton
             android:id="@+id/rb_category_porcelain"
@@ -90,8 +90,8 @@
             android:id="@+id/rb_time_period_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="18th and earlier"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="18th and earlier" />
 
         <RadioButton
             android:id="@+id/rb_time_period_2"
@@ -126,8 +126,8 @@
             android:id="@+id/rb_condition_needs_repair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Needs repair"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="Needs repair" />
 
         <RadioButton
             android:id="@+id/rb_condition_fair"
@@ -148,9 +148,41 @@
             android:text="Excellent" />
     </RadioGroup>
 
-
-    <!--TODO add img-->
     <!--Image-->
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_add_new_item_form"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:minWidth="250dp"-->
+<!--        android:minHeight="250dp" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_upload_image_add_new_item_form"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_weight="0"-->
+<!--        android:text="@string/btn_upload_image_text" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_take_picture_add_new_item_form"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="@string/take_picture" />-->
+
+    <!--Note-->
+    <TextView
+        android:id="@+id/tv_note"
+        style="@style/multi_text_view_style"
+        android:text="@string/note" />
+
+    <EditText
+        android:id="@+id/et_note"
+        style="@style/main_edit_text"
+        android:ems="30"
+        android:hint="@string/ex_this_is_a_nice_piece" />
 
     <!--Submit button-->
     <Button

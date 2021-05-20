@@ -22,4 +22,16 @@
     <string name="settings_category_content">Content</string>
     <string name="title_activity_view_item_card">Item Information</string>
     <string name="filepath_save">/data/data/com.example.antiquescatalog/files/save.txt</string>
+    <string name="btn_upload_image_text">Attach Picture</string>
+    <string name="take_picture">Take Picture</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="ex_this_is_a_nice_piece">ex. This is a nice piece!</string>
+    <string name="note">Note:</string>
 </resources>

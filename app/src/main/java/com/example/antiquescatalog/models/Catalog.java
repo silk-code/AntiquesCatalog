@@ -17,9 +17,9 @@ public class Catalog {
 
 
     public void addItem(
-            String title, String category, String timePeriod, String condition //, image
+            String title, String category, String timePeriod, String condition, String note //, image
     ) {
-        itemArrayList.add(new Item(title, category, timePeriod, condition));
+        itemArrayList.add(new Item(title, category, timePeriod, condition, note));
         count++;
         System.out.println(count);
     }

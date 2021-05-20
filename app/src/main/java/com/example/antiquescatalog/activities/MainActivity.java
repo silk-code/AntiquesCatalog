@@ -1,8 +1,11 @@
 package com.example.antiquescatalog.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.antiquescatalog.R;
@@ -15,8 +18,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private final String mKeyCatalog = "CATALOG";
     private final String path = "save.txt";
     public static Item newItem = null;
+    private static final int REQUEST_STORAGE_PERMISSIONS=0;
+    private static final String[] STORAGE_PERMISSIONS= new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     //endregion
 
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupFAB() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 showAddNewItem();
@@ -84,11 +94,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void showAddNewItem() {
         //dismissSnackBarIfShown();
-        Intent intent = new Intent(getApplicationContext(), AddNewItemActivity.class);
-        intent.putExtra("mCatalog", mCatalog.getJSONFromCurrentObject());
-        startActivity(intent);
+        if(hasStoragePermission()) {
+            Intent intent = new Intent(getApplicationContext(), AddNewItemActivity.class);
+            intent.putExtra("mCatalog", mCatalog.getJSONFromCurrentObject());
+            startActivity(intent);
+        }else{
+            requestPermissions(STORAGE_PERMISSIONS,REQUEST_STORAGE_PERMISSIONS);
+        }
     }
 
     private void setupRecyclerView() {
@@ -105,11 +120,14 @@ public class MainActivity extends AppCompatActivity {
     private AdapterOnItemClickListener getNewOnItemClickListener() {
         return new AdapterOnItemClickListener() {
             public void onItemClick(int position, View view) {
-                showInfoDialog(MainActivity.this, "Item information",
-                        "Title:  " + mCatalogAdapter.getItem(position).getTitle() +
-                                "\nCategory: " + mCatalogAdapter.getItem(position).getCategory() +
-                                "\nTime Period: " + mCatalogAdapter.getItem(position).getTimePeriod() +
-                                "\nCondition: " + mCatalogAdapter.getItem(position).getCondition());
+
+                Intent intent = new Intent(getApplicationContext(), ViewItemCardActivity.class);
+                intent.putExtra("title", mCatalogAdapter.getItem(position).getTitle());
+                intent.putExtra("category", mCatalogAdapter.getItem(position).getCategory());
+                intent.putExtra("timePeriod", mCatalogAdapter.getItem(position).getTimePeriod());
+                intent.putExtra("condition", mCatalogAdapter.getItem(position).getCondition());
+                intent.putExtra("note", mCatalogAdapter.getItem(position).getNote());
+                startActivity(intent);
             }
         };
     }
@@ -247,6 +265,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean hasStoragePermission(){
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(),STORAGE_PERMISSIONS[0]);
+        return result== PackageManager.PERMISSION_GRANTED;
     }
 
     //endregion
