@@ -34,4 +34,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="ex_this_is_a_nice_piece">ex. This is a nice piece!</string>
     <string name="note">Note:</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

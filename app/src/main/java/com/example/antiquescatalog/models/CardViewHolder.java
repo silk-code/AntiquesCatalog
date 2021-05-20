@@ -11,8 +11,7 @@ import com.example.antiquescatalog.R;
 
 public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public final CardView cardView;
-    public final TextView tv_title,tv_category;
-    //private AdapterOnItemClickListener mClickListener;
+    public final TextView tv_title, tv_category;
 
     public CardViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,6 +31,4 @@ public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         tv_title.setText(i.getTitle());
         tv_category.setText(i.getCategory());
     }
-
-
 }

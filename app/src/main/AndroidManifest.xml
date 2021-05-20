@@ -15,10 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiquesCatalog">
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.ViewItemCardActivity"
             android:label="@string/title_activity_view_item_card"
-            android:theme="@style/Theme.AntiquesCatalog.NoActionBar.Dialog"/>
+            android:theme="@style/Theme.AntiquesCatalog.NoActionBar.Dialog" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -32,8 +39,6 @@
             android:theme="@style/Theme.AntiquesCatalog.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
